@@ -1,56 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My Love Letter 💖</title>
+<title>Forever Yours 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body {
-    margin: 0;
-    padding: 30px;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #ff758c, #ff7eb3);
-    color: white;
-    opacity: 0;
-    transition: opacity 2s;
+body{
+margin:0;
+padding:30px;
+font-family:Arial;
+background:linear-gradient(45deg,#ff4e8a,#ff6ec7);
+color:white;
+opacity:0;
+transition:2s;
 }
 
-.container {
-    background: rgba(255,255,255,0.1);
-    padding: 25px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
+.container{
+background:rgba(255,255,255,0.15);
+padding:25px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+min-height:60vh;
+}
+
+#text{
+white-space:pre-line;
+font-size:18px;
 }
 </style>
 </head>
 
-<body>
+<body onclick="playLetterMusic()">
 
 <div class="container">
 <h2>My Dearest Rutuja ❤️</h2>
-
-<p>
-From the day you came into my life, everything became more beautiful.
-Your smile is my peace, your voice is my favorite sound,
-and your love is my biggest strength.
-</p>
-
-<p>
-I promise to stand by you, support you,
-annoy you, love you, and protect you forever.
-You are not just my girlfriend…
-you are my everything. 💖
-</p>
-
-<p>
-Forever yours,<br>
-Himanshu ❤️
-</p>
-
+<p id="text"></p>
 </div>
 
+<audio id="letterMusic" loop>
+<source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kai_Engel/Irsens_Tale/Kai_Engel_-_03_-_Moonlight_Reprise.mp3">
+</audio>
+
 <script>
-window.onload = function() {
-    document.body.style.opacity = "1";
+window.onload=function(){
+document.body.style.opacity="1";
+typeWriter();
+}
+
+function playLetterMusic(){
+document.getElementById("letterMusic").play();
+}
+
+let message=`From the moment you entered my life,
+everything became magical.
+
+Your smile is my peace.
+Your voice is my comfort.
+Your love is my greatest blessing.
+
+I promise to stand by you,
+support you,
+annoy you,
+protect you,
+and love you forever.
+
+You are not just my girlfriend…
+You are my forever. 💖
+
+Forever Yours,
+Himanshu ❤️`;
+
+let i=0;
+
+function typeWriter(){
+if(i<message.length){
+document.getElementById("text").innerHTML+=message.charAt(i);
+i++;
+setTimeout(typeWriter,40);
+}
 }
 </script>
 
