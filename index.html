@@ -5,106 +5,131 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(45deg,#ff4e8a,#ff6ec7);
-    transition: 1s;
+body{
+margin:0;
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-family:Arial;
+background:linear-gradient(45deg,#ff4e8a,#ff6ec7);
+transition:1s;
 }
 
-h1 {
-    color: white;
-    text-align: center;
-    font-size: 28px;
-    z-index: 2;
+h1{
+color:white;
+text-align:center;
+font-size:30px;
+z-index:2;
 }
 
-button {
-    padding: 12px 25px;
-    margin: 10px;
-    font-size: 18px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.3s;
-    z-index: 2;
+button{
+padding:12px 25px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+transition:0.3s;
+z-index:2;
 }
 
-#yesBtn {
-    background: white;
-    color: #ff4e8a;
+#yesBtn{
+background:white;
+color:#ff4e8a;
 }
 
-#noBtn {
-    background: #ff4e8a;
-    color: white;
-    position: absolute;
+#noBtn{
+background:#ff4e8a;
+color:white;
+position:absolute;
 }
 
-.heart {
-    position: absolute;
-    color: white;
-    animation: float 6s linear infinite;
+.heart{
+position:absolute;
+color:white;
+animation:float 6s linear infinite;
 }
 
-@keyframes float {
-    0% { transform: translateY(100vh); opacity: 1; }
-    100% { transform: translateY(-10vh); opacity: 0; }
+@keyframes float{
+0%{transform:translateY(100vh);opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+
+.firework{
+position:absolute;
+width:10px;
+height:10px;
+border-radius:50%;
+animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+0%{transform:scale(1);opacity:1;}
+100%{transform:scale(8);opacity:0;}
 }
 </style>
 </head>
 
-<body onclick="playMusic()">
+<body onclick="startMusic()">
 
 <h1>Rutuja, Will You Be Mine Forever? ❤️</h1>
 
-<button id="yesBtn" onclick="goToLetter()">YES ❤️</button>
+<button id="yesBtn" onclick="legendaryYes()">YES ❤️</button>
 <button id="noBtn" onmouseover="moveNo()">NO 😜</button>
 
 <audio id="bgMusic" loop>
-<source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/mpeg">
+<source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kai_Engel/Irsens_Tale/Kai_Engel_-_01_-_Irsens_Tale.mp3">
 </audio>
 
 <script>
-let yesSize = 18;
+let yesSize=18;
 
-function playMusic(){
-    document.getElementById("bgMusic").play();
+function startMusic(){
+document.getElementById("bgMusic").play();
 }
 
-function moveNo() {
-    let btn = document.getElementById("noBtn");
-    btn.style.top = Math.random()*80 + "%";
-    btn.style.left = Math.random()*80 + "%";
-
-    yesSize += 5;
-    document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+function moveNo(){
+let btn=document.getElementById("noBtn");
+btn.style.top=Math.random()*80+"%";
+btn.style.left=Math.random()*80+"%";
+yesSize+=6;
+document.getElementById("yesBtn").style.fontSize=yesSize+"px";
 }
 
-function goToLetter(){
-    document.body.style.opacity = "0";
-    setTimeout(function(){
-        window.location.href="loveletter.html";
-    },1000);
+function legendaryYes(){
+
+// Fireworks
+for(let i=0;i<20;i++){
+let fw=document.createElement("div");
+fw.className="firework";
+fw.style.background="hsl("+Math.random()*360+",100%,60%)";
+fw.style.top=Math.random()*100+"vh";
+fw.style.left=Math.random()*100+"vw";
+document.body.appendChild(fw);
+setTimeout(()=>fw.remove(),1000);
 }
 
-// Floating hearts
-setInterval(function(){
-    let heart = document.createElement("div");
-    heart.innerHTML = "❤️";
-    heart.className = "heart";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = Math.random()*20 + 15 + "px";
-    document.body.appendChild(heart);
+document.body.style.opacity="0";
 
-    setTimeout(()=>{heart.remove();},6000);
-},500);
+setTimeout(()=>{
+window.location.href="loveletter.html";
+},1500);
+}
+
+// floating hearts
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.className="heart";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*25+15+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},400);
+
 </script>
 
 </body>
